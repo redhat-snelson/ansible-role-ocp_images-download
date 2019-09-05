@@ -1,0 +1,34 @@
+---
+- name: Skopeo from Redhat (OpenShift Required)
+  shell:
+    skopeo copy \
+        --src-creds {{ src_registry_user}}:{{ src_registry_passwd }} \
+        docker://{{ src_registry_url }}{{ item }} \
+        containers-storage:{{ src_registry_url }}{{ item }}
+  with_items:
+    - "{{ docker_image_list_required }}"
+  tags:
+    - openshift_required
+
+- name: Skopeo from Redhat (OpenShift Optional)
+  shell:
+    skopeo copy \
+        --src-creds {{ src_registry_user}}:{{ src_registry_passwd }} \
+        docker://{{ src_registry_url }}{{ item }} \
+        containers-storage:{{ src_registry_url }}{{ item }}
+  with_items:
+    - "{{ docker_image_list_optional }}"
+  tags:
+    - openshift_optional
+
+- name: Skopeo from Redhat (OpenShift S2I)
+  shell:
+    skopeo copy \
+        --src-creds {{ src_registry_user}}:{{ src_registry_passwd }} \
+        docker://{{ src_registry_url }}{{ item }} \
+        containers-storage:{{ src_registry_url }}{{ item }}
+  with_items:
+    - "{{ docker_image_list_s2i }}"
+  tags:
+    - openshift_s2i
+
