@@ -2,8 +2,10 @@
 - name: Skopeo from Redhat (OpenShift Required)
   command:
     argv:
-      - "skopeo copy"
-      - "--src-creds {{ src_registry_user }}:{{ src_registry_passwd }}"
+      - skopeo
+      - copy
+      - --src-creds
+      - "{{ src_registry_user }}:{{ src_registry_passwd }}"
       - "docker://{{ src_registry_url }}{{ item }}"
       - "containers-storage:{{ src_registry_url }}{{ item }}"
   changed_when: True
@@ -15,8 +17,10 @@
 - name: Skopeo from Redhat (OpenShift Optional)
   command:
     argv:
-      - "skopeo copy"
-      - "--src-creds {{ src_registry_user }}:{{ src_registry_passwd }}"
+      - skopeo
+      - copy
+      - --src-creds
+      - "{{ src_registry_user }}:{{ src_registry_passwd }}"
       - "docker://{{ src_registry_url }}{{ item }}"
       - "containers-storage:{{ src_registry_url }}{{ item }}"
   changed_when: True
@@ -28,8 +32,10 @@
 - name: Skopeo from Redhat (OpenShift S2I)
   command:
     argv:
-      - "skopeo copy"
-      - "--src-creds {{ src_registry_user }}:{{ src_registry_passwd }}"
+      - skopeo
+      - copy
+      - --src-creds
+      - "{{ src_registry_user }}:{{ src_registry_passwd }}"
       - "docker://{{ src_registry_url }}{{ item }}"
       - "containers-storage:{{ src_registry_url }}{{ item }}"
   changed_when: True
@@ -37,4 +43,3 @@
     - "{{ docker_image_list_s2i }}"
   tags:
     - openshift_s2i
-
